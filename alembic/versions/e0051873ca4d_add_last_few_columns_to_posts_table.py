@@ -8,7 +8,7 @@ Create Date: 2025-10-15 05:02:17.290878
 from typing import Sequence, Union
 
 from alembic import op
-import sqlalchemy as sa
+import sqlalchemy as sa,text
 
 
 # revision identifiers, used by Alembic.
@@ -19,7 +19,7 @@ depends_on: Union[str, Sequence[str], None] = None
 
 
 def upgrade() -> None:
-    op.add_column("posts", sa.Column("published", sa.Boolean(), nullable=False, server_default=True))
+    op.add_column("posts", sa.Column("published", sa.Boolean(), nullable=False, server_default=text("true")))
     op.add_column("posts", sa.Column("created_at", sa.TIMESTAMP(timezone=True), nullable=False, server_default=sa.text("now()")))
     pass
 
