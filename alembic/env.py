@@ -18,9 +18,9 @@ config = context.config
 #if DATABASE_URL is None:
     #DATABASE_URL = f"postgresql+psycopg2://{settings.database_username}:{settings.database_password}@{settings.database_hostname}:{settings.database_port}/{settings.database_name}"
 
-config.set_main_option("sqlalchemy.url", f"postgresql+psycopg2://{settings.database_username}:{settings.database_password}@{settings.database_hostname}:{settings.database_port}/{settings.database_name}")
+config.set_main_option("sqlalchemy.url", f"postgresql+psycopg2://u20kcu3rmmlks1:pc1d51cdd9065c4328aa896597152f512866ba7b42eef48a8b0d0835dc75836f3@ca8lne8pi75f88.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/dbqm0uts851t99")
 
-
+#postgresql+psycopg2://{settings.database_username}:{settings.database_password}@{settings.database_hostname}:{settings.database_port}/{settings.database_name}
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
