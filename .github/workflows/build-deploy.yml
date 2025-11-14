@@ -4,9 +4,9 @@ on: [push, pull_request]
 
 jobs:
   job1:
-    runs-on: ubuntu-latest    # ← Move this FIRST
+    runs-on: ubuntu-latest
     
-    env:                      # ← Then env block
+    env:
       DATABASE_HOSTNAME: ${{secrets.DATABASE_HOSTNAME}}
       DATABASE_PORT: ${{secrets.DATABASE_PORT}}
       DATABASE_PASSWORD: ${{secrets.DATABASE_PASSWORD}}
@@ -30,9 +30,21 @@ jobs:
 
       - name: install all dependencies
         run: pip install -r requirements.txt
+      
+      - name: DEBUG - Check environment variables
+        run: |
+          echo "Checking environment variables..."
+          echo "ACCESS_TOKEN_EXPIRE_MINUTES value: '${ACCESS_TOKEN_EXPIRE_MINUTES}'"
+          echo "ACCESS_TOKEN_EXPIRE_MINUTES length: ${#ACCESS_TOKEN_EXPIRE_MINUTES}"
+          echo "DATABASE_PORT: '${DATABASE_PORT}'"
+          echo "ALGORITHM: '${ALGORITHM}'"
+          if [ -z "$ACCESS_TOKEN_EXPIRE_MINUTES" ]; then
+            echo "ERROR: ACCESS_TOKEN_EXPIRE_MINUTES is empty!"
+          else
+            echo "SUCCESS: ACCESS_TOKEN_EXPIRE_MINUTES has a value"
+          fi
         
       - name: test with pytest
         run: |
           pip install pytest
           pytest
-          
