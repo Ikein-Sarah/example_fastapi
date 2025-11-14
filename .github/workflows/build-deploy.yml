@@ -5,6 +5,7 @@ on: [push, pull_request]
 jobs:
   job1:
     runs-on: ubuntu-latest
+    environment: testing
     
     env:
       DATABASE_HOSTNAME: ${{secrets.DATABASE_HOSTNAME}}
@@ -33,16 +34,6 @@ jobs:
       
       - name: test with pytest
         run: |
-          echo "=== DEBUG: Checking environment variables ==="
-          echo "ACCESS_TOKEN_EXPIRE_MINUTES: '${ACCESS_TOKEN_EXPIRE_MINUTES}'"
-          echo "Length: ${#ACCESS_TOKEN_EXPIRE_MINUTES}"
-          echo "DATABASE_PORT: '${DATABASE_PORT}'"
-          echo "ALGORITHM: '${ALGORITHM}'"
-          if [ -z "$ACCESS_TOKEN_EXPIRE_MINUTES" ]; then
-            echo "ERROR: ACCESS_TOKEN_EXPIRE_MINUTES is EMPTY!"
-            exit 1
-          fi
-          echo "=== Environment variable check passed, installing pytest ==="
           pip install pytest
           pytest
           
