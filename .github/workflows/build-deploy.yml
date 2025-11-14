@@ -4,7 +4,9 @@ on: [push, pull_request]
 
 jobs:
   job1:
-    env:
+    runs-on: ubuntu-latest    # ← Move this FIRST
+    
+    env:                      # ← Then env block
       DATABASE_HOSTNAME: ${{secrets.DATABASE_HOSTNAME}}
       DATABASE_PORT: ${{secrets.DATABASE_PORT}}
       DATABASE_PASSWORD: ${{secrets.DATABASE_PASSWORD}}
@@ -13,7 +15,7 @@ jobs:
       SECRET_KEY: ${{secrets.SECRET_KEY}}
       ALGORITHM: ${{secrets.ALGORITHM}}
       ACCESS_TOKEN_EXPIRE_MINUTES: ${{secrets.ACCESS_TOKEN_EXPIRE_MINUTES}}
-    runs-on: ubuntu-latest
+    
     steps:
       - name: pulling git repo
         uses: actions/checkout@v2
@@ -28,7 +30,9 @@ jobs:
 
       - name: install all dependencies
         run: pip install -r requirements.txt
+        
       - name: test with pytest
         run: |
           pip install pytest
           pytest
+          
