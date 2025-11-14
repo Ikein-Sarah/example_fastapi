@@ -17,7 +17,7 @@ if DATABASE_URL:
     if DATABASE_URL.startswith("postgres://"):
         DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
 else:
-    DATABASE_URL = "postgresql://postgres:1326@localhost:5432/fastapi"
+    DATABASE_URL = f"postgresql://{settings.database_username}:{settings.database_password}@{settings.database_hostname}:{settings.database_port}/{settings.database_name}"
 
 # Other environment variables
 SECRET_KEY = os.environ.get("SECRET_KEY", "hello123")
